@@ -11,6 +11,7 @@
   "author": "Alex Haines",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.15.3",
     "lodash": "^4.17.4",
     "ngreact": "^0.3.0",
     "react": "^15.4.2",

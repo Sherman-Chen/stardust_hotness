@@ -1,1 +1,67 @@
-//write styles here
+/*write styles here*/
+$font-stack: 'Roboto', arial, sans-seif;
+$font-color: #000000;
+$bg-color: #FFFFFF;
+$border-color: #E7E8E9;
+$bullet-color: #9BCA3C;
+
+body {
+	font-size: 62.5%;
+	font-family: $font-stack;
+	font-color: $font-color;
+	background-color: $bg-color;
+	padding: 1rem;
+}
+
+.container {
+	border: 2px solid $border-color;
+	padding: 5px;
+	display: flex;
+	flex-direction: column;
+}
+
+.header {
+	margin-left: 1rem;
+	margin-bottom: 1rem;
+}
+
+.heading {
+	font-size: 1.6rem;
+}
+
+.product {
+	height: 15vh;
+	width: 90vw;
+	display: flex;
+	justify-content: center;
+	flex-flow: row nowrap;
+	margin-left: 3rem;
+}
+
+.bullet {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 4.4rem;
+	width: 4.4rem;
+	text-align: center;
+	border-radius: 50%;
+	background-color: $bullet-color;
+	color: $bg-color;
+	font-size: 1.4rem;
+	margin-right: 3rem;
+}
+
+.product-container {
+	height: 4.4rem;
+	width: 75vw;
+	border-top: 2px solid $border-color;
+}
+
+.product-name {
+	font-size: 1.4rem;
+}
+
+.product-revenue {
+	font-size: 1rem;
+}
