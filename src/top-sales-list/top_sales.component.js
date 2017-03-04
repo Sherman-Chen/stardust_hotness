@@ -37,15 +37,15 @@ export default class TopSales extends React.Component {
         const revenue = (product.order_count * (product.vendor_price.value / product.vendor_price.scale)).toFixed(2); // this is the formula to grab revenue
 
         return(
-          <div key={index} className="product" tabIndex={(index + 1) + 1}>
+          <section key={index} className="product" tabIndex={(index + 1) + 1}>
             <div>
-              <p className="bullet">{index + 1}</p>
+              <p className="bullet" role="bullet-ordering">{index + 1}</p>
             </div>
-            <div className="product-container">
+            <article className="product-container">
               <p className="product-name">{product.name}</p>
               <p className="product-revenue">${revenue}</p>
-            </div>            
-          </div>
+            </article>            
+          </section>
           )
       });
 

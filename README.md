@@ -4,7 +4,7 @@
 
 1. git clone repo
 2. npm install
-3. npm build
+3. npm build / open new tab and json-server --watch ./data/db.json
 4. open test-app/react_app.html
 
 ## Narrative 
