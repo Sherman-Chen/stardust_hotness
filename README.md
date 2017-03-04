@@ -1,5 +1,12 @@
 # HotSchedules Front-end Engineering Challenge
 
+## Completed 
+
+1. git clone repo
+2. npm install
+3. npm build
+4. open test-app/react_app.html
+
 ## Narrative 
 
 After realizing the user experience of their application suite is disjointed, shadowy upper-management figures
