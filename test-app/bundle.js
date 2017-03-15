@@ -36524,7 +36524,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       /******/__webpack_require__.p = "";
 
       /******/ // Load entry module and return exports
-      /******/return __webpack_require__(__webpack_require__.s = 62);
+      /******/return __webpack_require__(__webpack_require__.s = 63);
       /******/
     }(
     /************************************************************************/
@@ -38538,7 +38538,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
       "use strict";
 
-      module.exports = __webpack_require__(50);
+      module.exports = __webpack_require__(51);
 
       /***/
     },
@@ -38853,7 +38853,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         var ReactComponentTreeHook = __webpack_require__(12);
         var ReactElement = __webpack_require__(4);
 
-        var checkReactTypeSpec = __webpack_require__(57);
+        var checkReactTypeSpec = __webpack_require__(58);
 
         var canDefineProperty = __webpack_require__(15);
         var getIteratorFn = __webpack_require__(16);
@@ -39113,7 +39113,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
       var _react2 = _interopRequireDefault(_react);
 
-      var _top_sales = __webpack_require__(61);
+      var _top_sales = __webpack_require__(62);
 
       var _top_sales2 = _interopRequireDefault(_top_sales);
 
@@ -39121,9 +39121,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
       var _axios2 = _interopRequireDefault(_axios);
 
-      var _transformData = __webpack_require__(45);
+      var _transformData = __webpack_require__(46);
 
       var _transformData2 = _interopRequireDefault(_transformData);
+
+      var _top_sellers = __webpack_require__(45);
+
+      var _top_sellers2 = _interopRequireDefault(_top_sellers);
 
       function _interopRequireDefault(obj) {
         return obj && obj.__esModule ? obj : { default: obj };
@@ -39149,8 +39153,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
       //write top sales list component here
 
-      var TopSales = function (_React$Component) {
-        _inherits(TopSales, _React$Component);
+      var TopSales = function (_Component) {
+        _inherits(TopSales, _Component);
 
         function TopSales() {
           _classCallCheck(this, TopSales);
@@ -39172,8 +39176,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             var _this2 = this;
 
             _axios2.default.get('http://localhost:3000/PurchaseOrders').then(function (payload) {
-              var data = payload.data;
-              var topTen = (0, _transformData2.default)(data);
+              var data = payload.data; // this is because axios parse the return as JSON for us
+              var topTen = (0, _transformData2.default)(data); // call transformData here so we can keep do this before presenting the data   
               _this2.setState({
                 data: topTen
               });
@@ -39182,21 +39186,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             });
           }
 
-          // if state is ready, map over and show content
+          // if state is ready, map over and show content, alternatively you could have a this.state.loading flag, here I just check for length of data and let javascript falsy/truthy values determine for me
 
         }, {
           key: 'render',
           value: function render() {
             if (this.state.data.length) {
-
-              // mapped top ten products
-              var topTenSellers = this.state.data.map(function (product, index) {
-                var revenue = (product.order_count * (product.vendor_price.value / product.vendor_price.scale)).toFixed(2); // this is the formula to grab revenue
-
-                return _react2.default.createElement('section', { key: index, className: 'product', tabIndex: index + 1 + 1 }, _react2.default.createElement('div', null, _react2.default.createElement('p', { className: 'bullet', role: 'bullet-ordering' }, index + 1)), _react2.default.createElement('article', { className: 'product-container' }, _react2.default.createElement('p', { className: 'product-name' }, product.name), _react2.default.createElement('p', { className: 'product-revenue' }, '$', revenue)));
-              });
-
-              return _react2.default.createElement('section', { className: 'container' }, _react2.default.createElement('header', { className: 'header' }, _react2.default.createElement('h1', { className: 'heading', tabIndex: '1' }, 'Top Sales Items')), _react2.default.createElement('section', null, topTenSellers));
+              return _react2.default.createElement('section', { className: 'container' }, _react2.default.createElement('header', { className: 'header' }, _react2.default.createElement('h1', { className: 'heading', tabIndex: '1' }, 'Top Sales Items')), _react2.default.createElement('section', null, _react2.default.createElement(_top_sellers2.default, { sellers: this.state.data })));
             } else {
               // else return loading indicator
               return _react2.default.createElement('h1', null, 'Loading..');
@@ -39205,9 +39201,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         }]);
 
         return TopSales;
-      }(_react2.default.Component);
+      }(_react.Component);
 
       exports.default = TopSales;
+      ;
 
       /***/
     },
@@ -40014,6 +40011,93 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       Object.defineProperty(exports, "__esModule", {
         value: true
       });
+      exports.default = undefined;
+
+      var _createClass = function () {
+        function defineProperties(target, props) {
+          for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+          }
+        }return function (Constructor, protoProps, staticProps) {
+          if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+        };
+      }();
+
+      var _react = __webpack_require__(17);
+
+      var _react2 = _interopRequireDefault(_react);
+
+      var _top_seller = __webpack_require__(64);
+
+      var _top_seller2 = _interopRequireDefault(_top_seller);
+
+      function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : { default: obj };
+      }
+
+      function _classCallCheck(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+          throw new TypeError("Cannot call a class as a function");
+        }
+      }
+
+      function _possibleConstructorReturn(self, call) {
+        if (!self) {
+          throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+        }return call && ((typeof call === 'undefined' ? 'undefined' : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+      }
+
+      function _inherits(subClass, superClass) {
+        if (typeof superClass !== "function" && superClass !== null) {
+          throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === 'undefined' ? 'undefined' : _typeof(superClass)));
+        }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+      }
+
+      var TopSellers = function (_Component) {
+        _inherits(TopSellers, _Component);
+
+        function TopSellers() {
+          _classCallCheck(this, TopSellers);
+
+          return _possibleConstructorReturn(this, (TopSellers.__proto__ || Object.getPrototypeOf(TopSellers)).apply(this, arguments));
+        }
+
+        _createClass(TopSellers, [{
+          key: 'render',
+          value: function render() {
+            var sellers = this.props.sellers; // extract the sellers props
+
+            var mappedSellers = sellers.map(function (product, index) {
+              var revenue = (product.order_count * (product.vendor_price.value / product.vendor_price.scale)).toFixed(2); // this is the formula to grab revenue
+
+              return _react2.default.createElement(_top_seller2.default, { product: product, index: index, revenue: revenue, key: index }) // in the future I'd like to use a more unique key
+              ;
+            });
+
+            return _react2.default.createElement('div', { role: 'seller list' }, mappedSellers);
+          }
+        }]);
+
+        return TopSellers;
+      }(_react.Component);
+
+      exports.default = TopSellers;
+      ;
+
+      /* this is my business logic container, it receives the data from the top level component and then maps the data
+      performs any neccessary operations, in this case calcuate revenue, and passes the data down as props 
+      to presentation component */
+
+      /***/
+    },
+    /* 46 */
+    /***/function (module, exports, __webpack_require__) {
+
+      "use strict";
+
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
       exports.default = transformData;
       //feel free to use lodash; it provides alot of type methods that are native to other languages
       //import {function} from 'lodash';
@@ -40092,12 +40176,16 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         return topTenProducts;
       };
 
+      /* I chose to write this util function using pure vanilla javascript to demonstrate my understanding of the fundemental methods
+      if I were to have used lodash I would have used its Map function to iterate over objects, its Flatten function to 
+      reduce and flatten the giant data array, and its Uniq function to remove duplicates from my transformed array */
+
       /***/
     },
-    /* 46 */
+    /* 47 */
     /***/function (module, exports, __webpack_require__) {
 
-      exports = module.exports = __webpack_require__(47)();
+      exports = module.exports = __webpack_require__(48)();
       // imports
 
 
@@ -40118,7 +40206,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
       /***/
     },
-    /* 47 */
+    /* 48 */
     /***/function (module, exports) {
 
       /*
@@ -40172,7 +40260,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
       /***/
     },
-    /* 48 */
+    /* 49 */
     /***/function (module, exports, __webpack_require__) {
 
       "use strict";
@@ -40235,7 +40323,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
       /***/
     },
-    /* 49 */
+    /* 50 */
     /***/function (module, exports, __webpack_require__) {
 
       "use strict";
@@ -40355,7 +40443,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
       /***/
     },
-    /* 50 */
+    /* 51 */
     /***/function (module, exports, __webpack_require__) {
 
       "use strict";
@@ -40373,16 +40461,16 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
         var _assign = __webpack_require__(6);
 
-        var ReactChildren = __webpack_require__(51);
+        var ReactChildren = __webpack_require__(52);
         var ReactComponent = __webpack_require__(11);
-        var ReactPureComponent = __webpack_require__(55);
-        var ReactClass = __webpack_require__(52);
-        var ReactDOMFactories = __webpack_require__(53);
+        var ReactPureComponent = __webpack_require__(56);
+        var ReactClass = __webpack_require__(53);
+        var ReactDOMFactories = __webpack_require__(54);
         var ReactElement = __webpack_require__(4);
-        var ReactPropTypes = __webpack_require__(54);
-        var ReactVersion = __webpack_require__(56);
+        var ReactPropTypes = __webpack_require__(55);
+        var ReactVersion = __webpack_require__(57);
 
-        var onlyChild = __webpack_require__(58);
+        var onlyChild = __webpack_require__(59);
         var warning = __webpack_require__(2);
 
         var createElement = ReactElement.createElement;
@@ -40452,7 +40540,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
       /***/
     },
-    /* 51 */
+    /* 52 */
     /***/function (module, exports, __webpack_require__) {
 
       "use strict";
@@ -40466,11 +40554,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
        *
        */
 
-      var PooledClass = __webpack_require__(49);
+      var PooledClass = __webpack_require__(50);
       var ReactElement = __webpack_require__(4);
 
       var emptyFunction = __webpack_require__(9);
-      var traverseAllChildren = __webpack_require__(59);
+      var traverseAllChildren = __webpack_require__(60);
 
       var twoArgumentPooler = PooledClass.twoArgumentPooler;
       var fourArgumentPooler = PooledClass.fourArgumentPooler;
@@ -40646,7 +40734,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
       /***/
     },
-    /* 52 */
+    /* 53 */
     /***/function (module, exports, __webpack_require__) {
 
       "use strict";
@@ -41370,7 +41458,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
       /***/
     },
-    /* 53 */
+    /* 54 */
     /***/function (module, exports, __webpack_require__) {
 
       "use strict";
@@ -41548,7 +41636,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
       /***/
     },
-    /* 54 */
+    /* 55 */
     /***/function (module, exports, __webpack_require__) {
 
       "use strict";
@@ -41990,7 +42078,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
       /***/
     },
-    /* 55 */
+    /* 56 */
     /***/function (module, exports, __webpack_require__) {
 
       "use strict";
@@ -42036,7 +42124,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
       /***/
     },
-    /* 56 */
+    /* 57 */
     /***/function (module, exports, __webpack_require__) {
 
       "use strict";
@@ -42054,7 +42142,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
       /***/
     },
-    /* 57 */
+    /* 58 */
     /***/function (module, exports, __webpack_require__) {
 
       "use strict";
@@ -42149,7 +42237,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
       /***/
     },
-    /* 58 */
+    /* 59 */
     /***/function (module, exports, __webpack_require__) {
 
       "use strict";
@@ -42196,7 +42284,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
       /***/
     },
-    /* 59 */
+    /* 60 */
     /***/function (module, exports, __webpack_require__) {
 
       "use strict";
@@ -42219,7 +42307,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
         var getIteratorFn = __webpack_require__(16);
         var invariant = __webpack_require__(3);
-        var KeyEscapeUtils = __webpack_require__(48);
+        var KeyEscapeUtils = __webpack_require__(49);
         var warning = __webpack_require__(2);
 
         var SEPARATOR = '.';
@@ -42380,7 +42468,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
       /***/
     },
-    /* 60 */
+    /* 61 */
     /***/function (module, exports) {
 
       /*
@@ -42622,16 +42710,16 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
       /***/
     },
-    /* 61 */
+    /* 62 */
     /***/function (module, exports, __webpack_require__) {
 
       // style-loader: Adds some css to the DOM by adding a <style> tag
 
       // load the styles
-      var content = __webpack_require__(46);
+      var content = __webpack_require__(47);
       if (typeof content === 'string') content = [[module.i, content, '']];
       // add the styles to the DOM
-      var update = __webpack_require__(60)(content, {});
+      var update = __webpack_require__(61)(content, {});
       if (content.locals) module.exports = content.locals;
       // Hot Module Replacement
       if (false) {
@@ -42651,7 +42739,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
       /***/
     },
-    /* 62 */
+    /* 63 */
     /***/function (module, exports, __webpack_require__) {
 
       "use strict";
@@ -42679,6 +42767,38 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       };
 
       exports.default = Index;
+
+      /***/
+    },
+    /* 64 */
+    /***/function (module, exports, __webpack_require__) {
+
+      "use strict";
+
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+
+      var _react = __webpack_require__(17);
+
+      var _react2 = _interopRequireDefault(_react);
+
+      function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : { default: obj };
+      }
+
+      var TopSeller = function TopSeller(props) {
+        var product = props.product,
+            index = props.index,
+            revenue = props.revenue;
+
+        return _react2.default.createElement("section", { key: index, className: "product", tabIndex: index + 1 + 1 }, _react2.default.createElement("div", null, _react2.default.createElement("p", { className: "bullet", role: "bullet ordering" }, index + 1)), _react2.default.createElement("article", { className: "product-container" }, _react2.default.createElement("p", { className: "product-name" }, product.name), _react2.default.createElement("p", { className: "product-revenue" }, "$", revenue)));
+      };
+
+      exports.default = TopSeller;
+
+      // this is a purely presentational component, it's only purpose is to receive props and then format and make them look good
+      // it does not perform any business/logic operation
 
       /***/
     }])
@@ -42868,6 +42988,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         // return the top ten selling products
         return topTenProducts;
       };
+
+      /* I chose to write this util function using pure vanilla javascript to demonstrate my understanding of the fundemental methods
+      if I were to have used lodash I would have used its Map function to iterate over objects, its Flatten function to 
+      reduce and flatten the giant data array, and its Uniq function to remove duplicates from my transformed array */
 
       /***/
     }])

@@ -75,3 +75,7 @@ export default function transformData(data) {
   return topTenProducts;
 };
 
+/* I chose to write this util function using pure vanilla javascript to demonstrate my understanding of the fundemental methods
+if I were to have used lodash I would have used its Map function to iterate over objects, its Flatten function to 
+reduce and flatten the giant data array, and its Uniq function to remove duplicates from my transformed array */
+
