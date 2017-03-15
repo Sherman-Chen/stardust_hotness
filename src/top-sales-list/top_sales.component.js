@@ -50,3 +50,9 @@ export default class TopSales extends Component {
     }
   }
 };
+
+/* this component's job is twofold, first to render the general layout of the application, and two to be the entry point for the overall application
+state. When this component mounts it will fire off an initial AJAX request to grab the data we need to then plan out how to parse and present,
+it should not concern itself with any thing other than layout and setting initial state
+*/
+

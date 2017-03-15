@@ -12,3 +12,5 @@ const Index = () => {
 }
 
 export default Index;
+
+// this component's job is act as the overall container for the application, hence the semantic main tag
